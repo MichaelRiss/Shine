@@ -1,0 +1,17 @@
+How to install Shine
+
+You need:
+
+- the gcc C/C++ compiler
+- the gsl (GNU scientific library)
+
+Type "make".
+If you have the gsl installed in a exotic place you have to
+adjust the INCLUDE and LIBS lines in the Makefile.
+
+That should build 
+- Shine
+- make3D_C++
+- plain2nv/plain2nv
+
+Sorry, no autoconf/automake yet.

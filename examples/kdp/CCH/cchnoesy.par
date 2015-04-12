@@ -1,0 +1,20 @@
+header 0 0
+dim 3 640 256 256 128 32 16
+posneg 3
+lvl 0.1
+scale 1e+06
+rdims 0
+datatype 0
+byteorder 0
+sw 1 5918.5605
+sf 1 900.1300
+ref 1 6.1829 1.0000
+label 1 HC
+sw 2 16129.0322
+sf 2 226.3379
+ref 2 80.3304 1.0000
+label 2 C
+sw 3 16129.0322
+sf 3 226.3379
+ref 3 80.3304 1.0000
+label 3 C

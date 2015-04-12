@@ -1,0 +1,28 @@
+#freq:   600.13    60.81    60.81
+#spwd:  2480.15  1307.18  1307.18
+#size:      384      256      128
+#rfpt:      1.0      1.0      1.0
+#rfpm:    10.25   129.50   129.50
+#lwfc:     1.00     1.00     1.00
+#seqfile: sequence
+#pdbfile: protein.pdb
+#shiftfile: chemshifts
+#label: double
+#tumbling: isotropic
+#isocorrel_ns: 10.0
+#relax_delay_sec: 1.0
+#Mixing_times_sec: 1 0.08
+#inept_hetbound: 2.5
+#inept_hetbound_rev: 2.5
+#inept_hetfree: 2.5
+#inept_hetfree_rev: 2.5
+#heteromode: double
+#heterobound: N15
+#heterofree: N15
+#delay_proton: false
+#delay_hetbound: false
+#delay_hetfree: false
+#hetbound_sensitivity_enhanced: false
+#hetfree_sensitivity_enhanced: false
+#noemin: 0.00002
+#seq_start: 316
