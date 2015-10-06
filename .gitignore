@@ -1,0 +1,10 @@
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+CMakeFiles
+*.so
+*.a
+Shine
+make3D_C++
+nmrlib/util/iupac2xplor_pdb
+plain2nv/plain2nv

@@ -22,6 +22,22 @@ The simulation works with common parameter settings and the resulting
 spectra look sound. Some more exotic parameter settings have been 
 implemented but are not tested yet.
 
+### Compiling
+#### Prerequisites
+- C/C++ compiler
+- cmake 3.2.3 or later
+- gsl (GNU scientific library)
+
+#### Building
+- cmake
+- make
+
+It should build 
+- Shine
+- make3D_C++
+- plain2nv/plain2nv
+
+
 ### Usage - HOWTO:
 
 To conduct a simulation you need:
