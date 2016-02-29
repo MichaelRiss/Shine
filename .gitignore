@@ -8,3 +8,5 @@ Shine
 make3D_C++
 nmrlib/util/iupac2xplor_pdb
 plain2nv/plain2nv
+plain2strip/plain2strip
+install_manifest.txt

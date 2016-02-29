@@ -31,11 +31,13 @@ implemented but are not tested yet.
 #### Building
 - cmake
 - make
+- make install
 
 It should build 
 - Shine
 - make3D_C++
-- plain2nv/plain2nv
+- plain2strip
+- plain2nv (still included but not supported anymore)
 
 
 ### Usage - HOWTO:
@@ -442,25 +444,30 @@ the CCH-, CNH-, HCH-, HNH- and NNH-experiment on the kdp protein.
 Type:
 ```
 cd examples/kdp/CCH
-../../../Shine simulationparameters
-../../../make3D_C++ output.txt cchnoesy.plain
-../../../plain2nv/plain2nv cchnoesy cchnoesy.mat
+Shine simulationparameters
+make3D_C++ output.txt cchnoesy.plain
+plain2strip cchnoesy.plain simulationparameters cchnoesy.mat cchnoesy.plane cchnoesy.strip
+(plain2nv cchnoesy cchnoesy.mat)
 cd ../CNH
-../../../Shine simulationparameters
-../../../make3D_C++ output.txt cnhnoesy.plain
-../../../plain2nv/plain2nv cnhnoesy cnhnoesy.mat
+Shine simulationparameters
+make3D_C++ output.txt cnhnoesy.plain
+plain2strip cnhnoesy.plain simulationparameters cnhnoesy.mat cnhnoesy.plane cnhnoesy.strip
+(plain2nv cnhnoesy cnhnoesy.mat)
 cd ../HCH
-../../../Shine simulationparameters
-../../../make3D_C++ output.txt hchnoesy.plain
-../../../plain2nv/plain2nv hchnoesy hchnoesy.mat
+Shine simulationparameters
+make3D_C++ output.txt hchnoesy.plain
+plain2strip hchnoesy.plain simulationparameters hchnoesy.mat hchnoesy.plane hchnoesy.strip
+(plain2nv hchnoesy hchnoesy.mat)
 cd ../HNH
-../../../Shine simulationparameters
-../../../make3D_C++ output.txt hnhnoesy.plain
-../../../plain2nv/plain2nv hnhnoesy hnhnoesy.mat
+Shine simulationparameters
+make3D_C++ output.txt hnhnoesy.plain
+plain2strip hnhnoesy.plain simulationparameters hnhnoesy.mat hnhnoesy.plane hnhnoesy.strip
+(plain2nv hnhnoesy hnhnoesy.mat)
 cd ../NNH
-../../../Shine simulationparameters
-../../../make3D_C++ output.txt nnhnoesy.plain
-../../../plain2nv/plain2nv nnhnoesy nnhnoesy.mat
+Shine simulationparameters
+make3D_C++ output.txt nnhnoesy.plain
+plain2strip nnhnoesy.plain simulationparameters nnhnoesy.mat nnhnoesy.plane nnhnoesy.strip
+(plain2nv nnhnoesy nnhnoesy.mat)
 ```
 
 This should generate nmrview spectra in the corresponding folders.
@@ -469,11 +476,12 @@ Try to start with these examples and go on from there in small steps.
 
 ### Hacking the Code
 
-The code is unfortunately in a messy state, you just have to look at the
-numerous untested options above. :-\
-It's a fresh prototype which just succeeded simulating the first 
-experiments with sound results. So you should always be cautious
-with the results.
+The program has seen some routine use now, but the code is in a rather 
+unrefined shape. It still contains untested parts, just look at the 
+numerous untested options above.
+
+So far it simulates known experiments with sound looking output, but please 
+remain cautious with the results.
 
 The program was coded in three epochs. The first epoch was the port of 
 the fortran code to C++, the second epoch introduced different data 
