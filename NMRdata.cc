@@ -25,16 +25,8 @@
 
 #define LEAK0 0.5
 #define LEAK1 0.65
+#define LEAK2 0.75
 
-/* Originally the LEAK2 parameter has been set to 0.75 in the 
-   spirit fortran program, but as the LEAK2 parameter has not been 
-   declared it defaults to integer an the value of 0.75 mapped to 0.0
-   Bug or feature?
-   For compatibility we also set the value to 0.0, but s.o. with chemical
-   knowledge should find out what the correct value for LEAK2 is.
-   #define LEAK2 0.75
-*/
-#define LEAK2 0.0
 
 proton::proton( string Name, char aminoCode ){
   this->Name = Name;
@@ -45,7 +37,8 @@ proton::proton( string Name, char aminoCode ){
   x = NAN;
   y = NAN;
   z = NAN;
-  leak = NAN;
+  leak = LEAK0;
+
   if( Name == "HA" || 
       ( ( aminoCode == 'R' ) && 
 	( Name == "HB1" || Name == "HB2" || 
@@ -110,7 +103,7 @@ proton::proton( string Name, char aminoCode ){
 	( Name == "HB" ) ) ){
     leak = LEAK0;
   }
-  if( ( aminoCode == 'A' &&
+  else if( ( aminoCode == 'A' &&
         ( Name == "HB1" || Name == "HB2" || Name == "HB3" ) ) ||
       ( ( aminoCode == 'I' ) &&
 	( Name == "HD11" || Name == "HD12" || Name == "HD13" ||
@@ -128,12 +121,32 @@ proton::proton( string Name, char aminoCode ){
       ){
     leak = LEAK1;
   }
-  if( Name == "H" || Name == "HE" ){
+  else if( Name == "H" ||
+      (aminoCode == 'R' && Name == "HE"   ) ||
+      (aminoCode == 'R' && Name == "HH21" ) ||
+      (aminoCode == 'R' && Name == "HH22" ) ||
+      (aminoCode == 'N' && Name == "HD21" ) ||
+      (aminoCode == 'N' && Name == "HD22" ) ||
+      (aminoCode == 'Q' && Name == "HE21" ) ||
+      (aminoCode == 'Q' && Name == "HE22" ) ||
+      (aminoCode == 'K' && Name == "HZ1"  ) ||
+      (aminoCode == 'K' && Name == "HZ2"  ) ||
+      (aminoCode == 'K' && Name == "HZ3"  ) ){
     leak = LEAK2;
   }
+
   fold2 = 1.0;
   if( Name == "H" ||
-      (aminoCode == 'R' && Name == "HE") ){
+      (aminoCode == 'R' && Name == "HE"   ) || 
+      (aminoCode == 'R' && Name == "HH21" ) ||
+      (aminoCode == 'R' && Name == "HH22" ) ||
+      (aminoCode == 'N' && Name == "HD21" ) ||
+      (aminoCode == 'N' && Name == "HD22" ) ||
+      (aminoCode == 'Q' && Name == "HE21" ) ||
+      (aminoCode == 'Q' && Name == "HE22" ) ||
+      (aminoCode == 'K' && Name == "HZ1"  ) ||
+      (aminoCode == 'K' && Name == "HZ2"  ) ||
+      (aminoCode == 'K' && Name == "HZ3"  ) ){
     linewidth = LW_HN;
   }
   else{
@@ -257,7 +270,7 @@ hetero::hetero( string Name, char aminoCode, amino* residue ){
       !( aminoCode == 'H' && Name == "ND1" ) ){
     linewidth = LW_N;
   }
-  // Is this exception correct?
+  // Is this exception correct? I don't know, we observe this signal so rarely.
   if( aminoCode == 'H' && Name == "ND1" ){
     linewidth = LW_C;
   }
@@ -266,9 +279,9 @@ hetero::hetero( string Name, char aminoCode, amino* residue ){
       !( aminoCode == 'P' && Name == "CA" ) ){
     linewidth = LW_C;
   }
-  // Is this exception correct?
+  // Is this exception correct? No it's not. The nitrogen linewidth was used for Pro CA (MC 2015)
   if( aminoCode == 'P' && Name == "CA" ){
-    linewidth = LW_N;
+    linewidth = 50;  // This looks like a reasonable value
   }
 
   rj = NAN;
@@ -314,6 +327,9 @@ hetero::hetero( string Name, char aminoCode, amino* residue ){
     if( Name == "CB" ){
       rj = ASN_B;
     }
+    if( Name == "ND2" ){
+      rj = ALL_N;
+    }
     break;
   case 'D':
     if( Name == "N" ){
@@ -349,6 +365,9 @@ hetero::hetero( string Name, char aminoCode, amino* residue ){
     }
     if( Name == "CG" ){
       rj = GLN_G;
+    }
+    if( Name == "NE2" ){
+      rj = ALL_N;
     }
     break;
   case 'E':
@@ -498,8 +517,7 @@ hetero::hetero( string Name, char aminoCode, amino* residue ){
     break;
   case 'P':
     if( Name == "CA" ){
-      // FIXME: Is this really correct?
-      rj = ALL_N;
+      rj = PRO_A;
     }
     if( Name == "CB" ){
       rj = PRO_B;
