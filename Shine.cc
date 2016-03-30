@@ -45,11 +45,12 @@ double fnJ( double x, double t ){
 
 int main( int argc, char** argv ){
   /* Parse parameters */
-  if( argc != 2 ){
-    cout << "Usage: Shine <parameterfile>" << endl;
+  if( argc != 3 ){
+    cout << "Usage: Shine <parameterfile> <outfile>" << endl;
     exit(1);
   }
   char* parameterfile = argv[1];
+  char* outfile = argv[2];
 
 
   /* Parse input files */
@@ -1303,10 +1304,10 @@ int main( int argc, char** argv ){
 
   /* Write out results */
 
-  output.open( "output.txt" );
+  output.open( outfile );
   output.precision(5);
   if( !output.good() ){
-    cout << "Can't open output.txt, exiting." << endl;
+    cout << "Can't open output file, exiting." << endl;
     exit(1);
   }
 
